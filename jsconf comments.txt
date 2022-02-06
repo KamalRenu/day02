@@ -1,0 +1,88 @@
+How does the browser actually render a website?
+1)The components for using to rendering website
+      i)Bindings
+      ii)Rendering:Parsing, Layout, Painting etc
+      iii)Platform
+      iv)JavaScript VM
+  The binding, it will use certain APIs depending on the operating system, it constructing the website from the HTML, it
+will change depending on the operating system and JavaScript VM.
+2)Parsing HTML
+      i)HTML is forgiving by nature
+      ii)Parsing isn't straight forward
+      iii)can be halted
+      iv)will do speculative parsing
+      v)It's reentrant
+  Tokenizer example: <div></div>
+            < - Tag open
+            div - Tag name
+            > - Tag close
+            </ - closing tag open
+  There are certain situations to stop the parsing of the HTML. For example the script tag it needs to stop and fetch it
+  for the network so it will make slower to the render page.
+  <script>, <link>, & <style>
+  will halt the parser as a script can alter the document.
+     ->Network latency
+     ->link & style could halt JS execution
+  If we put the script tag in top of the body, it will stop the rendering HTML, So if we placed the script tag at bottom
+  of body it can go through and uninterrupted.
+3)Parsing CSS
+       It representation of styles, it hava a style sheets, rules, selectors, decorations
+4)Render Tree
+       It have a multiple trees
+            -> Render Objects
+            -> Render Layers
+            -> Render Styles
+            -> Line Boxes
+  DOM Node to Render Object
+            -> Vishval output
+            -> Geometric info
+            -> Can layout and paint
+            -> Holds style & computed metrics
+4)Layouts
+       It actually figuring out the dimensions, position, and laying out all it's children
+  Calculating visual properties
+            -> Combines all styles
+            -> defaults, external, style elements & inline
+            -> Complexity around matching rules for each element
+            -> Style computation
+       Recursive process
+            -> Traverse render tree
+            -> Nodes position and size
+            -> Layout its children
+       Will batch layouts
+            -> Incremental layouts
+            -> The browser will intelligently batch changes
+            -> Render tree items will themselves as dirty
+            -> The batch will traverse the tree and find all dirty trees
+            -> Asynchronous
+       Immediate layout
+            -> Doing a font-size change will relayout the entire document
+            -> Same with browser resize
+            -> Accessing certain properties via JavaScript e.g node.offsetHeight
+  Performance insight from browser
+       Take note from the browser and batch
+            -> Act like the browser and batch your Dom changes
+            -> Do all your reads in one pass
+            -> Followed by writes
+       Real world
+            -> FastDom, preventing layout thrashing
+            -> Most modern JS frameworks do this internally
+5)Paint
+      Paint sethub
+            -> Will take the layed out render trees
+            -> Creates layers
+            -> Incremental process
+            -> Builds up over 12 phases
+      RenderLayer
+            -> Creates layers from RenderObjects
+            -> Position nodes, transparency, overflow, canvas, video etc
+            -> Many-to-1 relationship a RenderLayer could contain multiple RenderObjects
+      Painting
+            -> Produces a bitmap from each layer
+            -> bitmap is uploaded to the GPU as a texture
+            -> Composites the textures into a final image to render to the screen
+      inline critical CSS
+            -> The most important bits of your site/app
+            -> Speeds up first paint times
+            -> Externaljs and css can block
+            -> Delta last bitmap 

@@ -1,0 +1,31 @@
+1)typeof(1)   //output:  number
+      The number data type is used to represent positive or negative numbers with or without decimal place, or numbers 
+  written using exponential notation e.g. 1.5e-4 (equivalent to 1.5x10-4).
+2)typeof(1.1)  //output: number
+      The number data type is used to represent positive or negative numbers with or without decimal place, or numbers 
+  written using exponential notation e.g. 1.5e-4 (equivalent to 1.5x10-4).
+3)typeof(‘1.1’)   //output:  string
+      The string data type is used to represent textual data (i.e. sequences of characters). Strings are created using 
+  single or double quotes surrounding one or more characters,
+4)typeof(true)   //output:  Boolean
+      The Boolean data type can hold only two values: true or false. It is typically used to     store values like yes 
+  (true) or no (false), on (true) or off (false)
+5)typeof(null)   //output:  object
+      The JavaScript specification says about null : null is a primitive value that represents the intentional absence of 
+  any object value. If you see null (either assigned to a variable or returned by a function), then at that place should 
+  have been an object, but for some reason, an object wasn't created.
+6)typeof(undefined)   //output:  undefined
+      The undefined data type can only have one value-the special value undefined. If a variable has been declared, but has
+  not been assigned a value, has the value undefined.
+7)typeof([])   //output:  object
+      The object is a complex data type that allows you to store collections of data. An object contains properties, 
+  defined as a key-value pair. A property key (name) is always a string, but the value can be any data type, like strings, 
+  numbers, booleans, or complex data types like arrays, function and other objects. In javascript array consider as a 
+  object by default.
+8)typeof({})   //output:  object
+      An object contains properties, defined as a key-value pair. A property key (name) is always a string, but the value 
+  can be any data type, like strings, numbers, booleans, or complex data types like arrays, function and other objects.
+9)typeof(NaN)   //output:  number
+      NaN is the return value from operations which have an undefined numerical result. Hence why, in JavaScript, aside 
+  from being part of the global object, it is also part of the Number object: Number. ... It is still a numeric data type 
+  , but it is undefined as a real number .
